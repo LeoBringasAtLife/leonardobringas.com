@@ -1,0 +1,350 @@
+:root {
+  /* --- Colors --- */
+  --bg-color: #fdfdfd;
+  --text-main: #111;
+  --text-muted: #828282;
+  --text-table: #3f3f3f;
+
+  /* --- Links --- */
+  --link-color: #4169e1;
+  --link-hover: #333333;
+  --link-nav: #666;
+
+  /* --- Borders & Backgrounds --- */
+  --border-light: #e8e8e8;
+  --border-table: #dedede;
+  --border-table-bottom: #c9c9c9;
+  --bg-table-alt: #f7f7f7;
+  --bg-table-header: #f0f0f0;
+  --bg-highlight: #f8f8f8;
+  --bg-code-inline: rgba(152, 152, 152, 0.1);
+
+  /* --- Typography --- */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  --font-serif: Palatino, 'Palatino Linotype', Georgia, Times, 'Times New Roman', serif;
+
+  /* --- Font Sizes --- */
+  --fs-base: 16px;
+  --fs-content: 18px;
+  --fs-small: 14px;
+  --fs-code: 15px;
+  --fs-post-link: 24px;
+
+  /* --- Spacing --- */
+  --spacing-xl: 32px;
+  --spacing-lg: 30px;
+  --spacing-md: 20px;
+  --spacing-sm: 16px;
+  --spacing-xs: 12px;
+  --max-width-page: 800px;
+  --container-padding: 0 20px;
+
+  /* --- Syntax Highlighting --- */
+  --hl-comment: #999988;
+  --hl-error: #a61717;
+  --hl-error-bg: #e3d2d2;
+  --hl-keyword: #000000;
+  --hl-type: #445588;
+  --hl-string: #d14;
+  --hl-regex: #009926;
+  --hl-symbol: #990073;
+  --hl-number: #009999;
+  --hl-attr: #008080;
+  --hl-builtin: #0086B3;
+  --hl-func: #990000;
+  --hl-tag: #000080;
+  --hl-diff-del: #ffdddd;
+  --hl-diff-ins: #ddffdd;
+}
+
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font: 400 var(--fs-base)/1.5 var(--font-sans);
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  -webkit-text-size-adjust: 100%;
+  font-kerning: normal;
+  min-height: 100vh;
+  max-width: var(--max-width-page);
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin-bottom: var(--spacing-xl);
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  border: 0;
+}
+
+/* 2. Typography & Links */
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, ul, ol, dl, figure, .highlight {
+  margin-bottom: var(--spacing-xl);
+  text-wrap: balance;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+ul, ol {
+  margin-left: var(--spacing-lg);
+}
+
+li > p {
+  margin-bottom: var(--spacing-sm);
+}
+
+li > ul, li > ol {
+  margin-bottom: 0;
+}
+
+blockquote {
+  color: var(--text-muted);
+  border-left: 4px solid var(--border-light);
+  padding-left: 15px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+figcaption {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+/* 3. Layout Components (Top Nav, Page Structure) */
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--spacing-xl) 0;
+}
+
+.top .heading,
+.top nav {
+  flex: 1;
+}
+
+.top nav {
+  text-align: right;
+}
+
+.top nav ul {
+  list-style: none;
+  margin: 0;
+}
+
+.top nav ul li {
+  display: inline-block;
+  margin-left: var(--spacing-sm);
+}
+
+.top a {
+  color: var(--link-nav);
+}
+
+.top a:hover,
+.top nav a.active {
+  color: var(--text-main);
+  text-decoration: underline;
+}
+
+.page-content {
+  padding: var(--spacing-lg) 0;
+  flex: 1;
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+/* 4. Content & Articles */
+
+.content {
+  font: var(--fs-content)/28px var(--font-serif);
+  margin-bottom: var(--spacing-lg);
+  text-rendering: optimizeLegibility;
+}
+
+.content .title {
+  margin-bottom: 4px;
+}
+
+.content .date {
+  color: var(--link-nav);
+  font-size: var(--fs-base);
+  margin-bottom: var(--spacing-xl);
+}
+
+.content h2 { font-size: 1.3em; }
+.content h3 { font-size: 1.1em; }
+.content h4 { font-size: 1em; font-weight: bold; }
+
+.post-list {
+  margin-left: 0;
+  list-style: none;
+}
+
+.post-list > li {
+  margin-bottom: var(--spacing-lg);
+}
+
+.post-meta {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.post-link {
+  display: block;
+  font-size: var(--fs-post-link);
+}
+
+/* 5. Tables (Unified & Responsive) */
+
+table, 
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-lg);
+  text-align: left;
+  color: var(--text-table);
+  border: 1px solid var(--border-light);
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table th, table td,
+article th, article td {
+  padding: 10px 15px;
+  border: 1px solid var(--border-light);
+  min-width: 120px;
+}
+
+table th,
+article thead {
+  background-color: var(--bg-table-header);
+  border: 1px solid var(--border-table);
+  border-bottom: 1px solid var(--border-table-bottom);
+}
+
+table tr:nth-child(even),
+article tr:nth-child(even) {
+  background-color: var(--bg-table-alt);
+}
+
+/* Reset for code highlight tables */
+.highlight table {
+  display: table;
+  overflow-x: visible;
+  margin-bottom: 0;
+  border: 0;
+}
+
+.highlight table td {
+  min-width: auto;
+  padding: 5px;
+  border: 0;
+}
+
+/* 6. Code & Syntax Highlighting */
+
+pre, code {
+  font-size: var(--fs-code);
+  font-family: var(--font-mono);
+  border: 1px solid var(--border-light);
+}
+
+code {
+  padding: 1px 5px;
+  background-color: var(--bg-code-inline);
+}
+
+pre {
+  padding: 8px 12px;
+  overflow-x: auto;
+  background-color: var(--bg-highlight);
+}
+
+pre > code {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+.highlight { background-color: var(--bg-highlight); }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .ch, .highlight .cd { color: var(--hl-comment); font-style: italic; }
+.highlight .cp { color: #999; font-weight: bold; }
+.highlight .err { color: var(--hl-error); background-color: var(--hl-error-bg); }
+.highlight .k, .highlight .kv, .highlight .kc, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr { color: var(--hl-keyword); font-weight: bold; }
+.highlight .kt { color: var(--hl-type); font-weight: bold; }
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s1,
+.highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx,
+.highlight .dl { color: var(--hl-string); }
+.highlight .sr { color: var(--hl-regex); }
+.highlight .ss { color: var(--hl-symbol); }
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo,
+.highlight .mb, .highlight .mx, .highlight .il { color: var(--hl-number); }
+.highlight .na { color: var(--hl-attr); }
+.highlight .nb { color: var(--hl-builtin); }
+.highlight .nc { color: var(--hl-type); font-weight: bold; }
+.highlight .no { color: var(--hl-attr); }
+.highlight .ne, .highlight .nf, .highlight .fm, .highlight .nl { color: var(--hl-func); font-weight: bold; }
+.highlight .nt { color: var(--hl-tag); }
+.highlight .ow, .highlight .o { color: var(--hl-keyword); font-weight: bold; }
+
+/* 7. Media Queries */
+
+@media screen and (max-width: 600px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-md) 0;
+  }
+
+  .top nav {
+    text-align: left;
+  }
+
+  .top nav ul li:first-child {
+    margin-left: 0;
+  }
+
+  .content {
+    font-size: var(--fs-base);
+    line-height: 26px;
+  }
+
+  .content h2 { font-size: 20px; }
+  .content h3 { font-size: 18px; }
+  .post-link { font-size: 20px; }
+  
+  pre, code {
+    font-size: 13px;
+  }
+}
