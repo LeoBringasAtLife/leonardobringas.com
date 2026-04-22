@@ -42,8 +42,13 @@
     </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 
-  <header class="top">
+  <div class="reading-progress" aria-hidden="true">
+    <span id="reading-progress-bar"></span>
+  </div>
+
+  <header class="top" role="banner">
     <div class="heading">
       <a href="#" data-view="home" class="nav-brand">Blog de Leonardo Bringas</a>
     </div>
@@ -55,26 +60,35 @@
     </nav>
   </header>
 
+  <main id="main-content" tabindex="-1">
   <!-- VISTA 1 — INICIO -->
-  <main id="view-home" class="view active page-content">
-    <ul class="post-list">
-        <!-- Publicación 1 -->
-        <li>
-            <span class="post-meta">Marzo 31, 2026</span>
-            <h3>
-            <a class="post-link nav-link" href="#" data-view="article">
-                Se filtró el código de Claude Code.
-            </a>
-            </h3>
-        </li>
+  <section id="view-home" class="view active page-content" aria-labelledby="home-heading">
+    <section class="home-intro" aria-labelledby="home-heading">
+      <h1 id="home-heading">Notas sobre software, IA y aprendizaje continuo.</h1>
+      <p>
+        Comparto análisis técnicos y aprendizajes prácticos sobre programación y herramientas modernas.
+      </p>
+    </section>
+
+    <ul class="post-list" aria-label="Listado de publicaciones">
+      <li class="post-card">
+        <span class="post-meta">Marzo 31, 2026</span>
+        <h2>
+          <a class="post-link nav-link" href="#" data-view="article">
+            Se filtró el código de Claude Code.
+          </a>
+        </h2>
+        <p>Un análisis de la filtración, su arquitectura y el impacto técnico y de mercado.</p>
+      </li>
     </ul>
-  </main>
+  </section>
 
   <!-- VISTA 2 - ARTÍCULO -->
-  <main id="view-article" class="view page-content">
+  <section id="view-article" class="view page-content" aria-labelledby="article-heading">
     <article class="content">
+      <a href="#" class="back-link nav-link" data-view="home">← Volver al blog</a>
       <header class="article-header">
-        <h1 class="title">Se filtró el código de <strong>Claude Code</strong></h1>
+        <h1 id="article-heading" class="title">Se filtró el código de <strong>Claude Code</strong></h1>
         <p class="post-meta">31 de Marzo 2026 | 14 minutos de lectura</p>
       </header>
 
@@ -96,7 +110,7 @@
             A través de un mapa de fuente (<code>source map</code>) publicado por error en el
             registro público de npm, la comunidad de desarrolladores obtuvo acceso
             a más de <strong>512.000 líneas de código TypeScript</strong>, desglosadas en
-            aproximadamente <code>1.900 archivos</code> que conforman el <em></em>“harness”</em>
+            aproximadamente <code>1.900 archivos</code> que conforman el <em>“harness”</em>
             o arnés agéntico que permite a los modelos de lenguaje de Anthropic
             operar de manera autónoma en entornos locales.
         </p>
@@ -929,14 +943,14 @@
         </section>
 
     </article>
-  </main>
+  </section>
 
 <!-- VISTA 3 — SOBRE MÍ -->
 
-<main id="view-about" class="view page-content">
+<section id="view-about" class="view page-content" aria-labelledby="about-heading">
 <article class="content">
 <header>
-<h1>Sobre mí</h1>
+<h1 id="about-heading">Sobre mí</h1>
 </header>
 
 <section>
@@ -944,7 +958,7 @@
 
   <!-- Foto personal -->
   <figure>
-    <img src="images/leo.webp" alt="Leonardo Bringas" width="200" height="200" style="border-radius: 10px">
+    <img class="profile-photo" src="images/leo.webp" alt="Leonardo Bringas" width="200" height="200">
   </figure>
 
   <p>
@@ -988,6 +1002,8 @@
 </section>
 
 </article>
+</section>
+
 </main>
 
   <script src="javascript/main.js"></script>
