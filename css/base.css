@@ -26,16 +26,22 @@ img {
 
 .skip-link {
   position: absolute;
-  left: -9999px;
-  top: 0;
+  top: -100px;
+  left: 20px;
+  background: var(--text-main);
+  color: var(--bg-color);
+  padding: 8px 16px;
   z-index: 1000;
-  background: #111;
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 8px;
+  transition: top 0.3s;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px;
 }
 
 .skip-link:focus {
-  left: 16px;
-  top: 16px;
+  top: 20px;
+}
+
+#main-content:focus {
+  outline: none;
 }
