@@ -1,0 +1,41 @@
+<article class="content">
+  <a href="#" class="back-link nav-link" data-view="home">← Back to blog</a>
+
+  <h1>What is OpenCode?</h1>
+
+  <img src="../images/posts-images/opencode.jpeg" alt="OpenCode" class="post-image" loading="lazy">
+
+  <p>OpenCode is an <strong>open-source</strong> programming agent under the MIT license, designed primarily to operate in the terminal (CLI/TUI), although it also has desktop applications and extensions for various IDEs. With over <u>149,000 stars</u> on <a href="https://github.com/anomalyco/opencode" target="_blank">GitHub</a>, it has established itself as one of the most popular and complete tools for AI-assisted development.</p>
+
+  <h2>How does OpenCode work?</h2>
+  Unlike a simple chatbot, OpenCode operates through an <strong>"agentic loop"</strong>, allowing it to analyze files, execute shell commands, write code, and perform tests autonomously until a task is completed. Its workflow is divided into two fundamental states that the user can toggle with the Tab key:
+
+  <ul>
+    <li>
+      <strong>Plan Mode:</strong> A read-only mode ideal for exploring unknown codebases, performing architectural analysis, or designing strategies without the risk of modifying files.
+    </li>
+    <li>
+      <strong>Build Mode:</strong> The default action mode, where the agent has write permissions to edit files and execute real commands on the system.
+    </li>
+  </ul>
+
+  <h2>Key Technical Features</h2>
+  OpenCode stands out for its ability to deeply understand a project's context via the <code>/init</code> command, which generates an <code>AGENTS.md</code> file summarizing the structure and conventions of the codebase. It also integrates advanced technologies such as:
+
+  <ul>
+    <li>
+      <strong>LSP (Language Server Protocol):</strong> To receive real-time diagnostics and compilation errors directly from the programming language used.
+    </li>
+    <li>
+      <strong>MCP (Model Context Protocol):</strong> Which allows connecting the AI with external tools like databases, web browsers, or cloud services.
+    </li>
+    <li>
+      <strong>Skills and Plugins:</strong> Packaged knowledge and extensions that modify the agent's behavior based on developer needs.
+    </li>
+  </ul>
+
+  <h2>Differences with other Models</h2>
+  While tools like <strong>Claude Code</strong> are strictly tied to the Anthropic ecosystem, OpenCode is <strong>provider-agnostic</strong>. This means it supports over <strong>75 model providers</strong>, allowing the user to choose between premium models like GPT-4 or Claude 3.5 Sonnet, or even local models running entirely offline via <strong>Ollama</strong> or <strong>LM Studio</strong>.
+
+  Finally, OpenCode offers greater <strong>data sovereignty and cost control</strong>. Under a <em>"local-first"</em> philosophy, the code remains on the developer's machine and allows for leveraging existing subscriptions to services like GitHub Copilot or ChatGPT Plus, avoiding additional token payments if local configurations are used.
+</article>

@@ -1,0 +1,140 @@
+<article class="content">
+  <a
+    href="#"
+    class="back-link nav-link"
+    data-view="home"
+  >← Back to blog</a>
+  <header class="article-header">
+    <h1
+      id="article-heading"
+      class="title"
+    >Claude Code's Source Code Leaked</h1>
+    <p class="post-meta">March 31, 2026 | 14 min read</p>
+  </header>
+
+  <section role="article">
+    <p class="lead">
+      The AI industry reached a critical turning point on March 31, 2026, when a series of operational configuration errors at <strong>Anthropic</strong> resulted in the massive exposure of the source code for its flagship development tool, <strong>Claude Code</strong>. This incident, occurring just before an IPO valued at $380 billion, not only revealed the technical secrets of one of the most advanced agentic systems on the market but also triggered a global reassessment of software supply chain security and the nature of intellectual property in the era of generative AI.
+    </p>
+
+    <p>
+      Through a source map inadvertently published on the public npm registry, the developer community gained access to over <strong>512,000 lines of TypeScript code</strong>, broken down into approximately 1,900 files that make up the <em>“harness”</em> or agentic framework that allows Anthropic's language models to operate autonomously in local environments.
+    </p>
+
+    <h2>The Anatomy of the Incident: Leak Mechanism and Chronology</h2>
+    <p>
+      The origin of the leak was not a sophisticated cyberattack or a malicious third-party intrusion, but a fundamental failure in the software packaging and release processes within Anthropic.
+    </p>
+
+    <p>
+      On March 30, 2026, the company published 
+      version 2.1.88 of the package <a href="https://www.npmjs.com/package/@anthropic-ai/claude-code" target="_blank" rel="noopener noreferrer">@anthropic-ai/claude-code</a> on the npm registry. While the production code was minified for performance, the package inadvertently included a 59.8 MB source map file named cli.js.map. In modern software development, these files are used for debugging, allowing compressed and obfuscated code to be mapped back to the original human-readable source code.
+    </p>
+
+    <p>
+      The specific technical failure is attributed to the use of <strong><a href="https://bun.sh/" target="_blank" rel="noopener noreferrer">Bun</a></strong> as the JavaScript runtime, a technology Anthropic had deeply integrated into its stack after acquiring it in late 2025. By default, Bun's bundler generates source maps unless explicitly excluded through configuration rules or an .npmignore file. In this case, a single omitted line in the exclusion configuration allowed the cli.js.map file to reference a compressed file hosted in an <a href="https://www.cloudflare.com/products/r2/" target="_blank" rel="noopener noreferrer">Anthropic Cloudflare R2</a> storage bucket. By downloading this file, researchers were able to reconstruct the entire TypeScript tree, complete with comments, original folder structures, and internal logic intact.
+    </p>
+
+    <figure style="text-align: center; margin: var(--spacing-xl) 0;">
+      <a
+        href="https://x.com/Fried_rice/status/2038894956459290963"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img
+          src="../images/posts-images/maps-claude-code.jpeg"
+          alt="Claude Code Maps"
+          class="post-image"
+          loading="lazy"
+        >
+      </a>
+      <figcaption style="font-size: var(--fs-small); color: var(--text-muted); margin-top: var(--spacing-xs);">
+        Source X/Twitter: <a
+          href="https://x.com/Fried_rice/status/2038894956459290963"
+          target="_blank"
+        >Chaofan Shou</a>
+      </figcaption>
+    </figure>
+
+    <h3>Chronology of the Incident (March 31, 2026)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Time (UTC)</th>
+          <th>Key Event</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>~01:00</td>
+          <td>Version 2.1.88 released with the .map file included.</td>
+        </tr>
+        <tr>
+          <td>08:23</td>
+          <td>Chaofan Shou identifies the leak and publishes the download link on X.</td>
+        </tr>
+        <tr>
+          <td>10:00</td>
+          <td>Anthropic pulls the package from npm and begins issuing DMCA notices.</td>
+        </tr>
+        <tr>
+          <td>12:00</td>
+          <td>GitHub mirrors surpass 40,000 forks.</td>
+        </tr>
+        <tr>
+          <td>16:00</td>
+          <td>Sigrid Jin publishes the initial version of &ldquo;claw-code&rdquo; in Python.</td>
+        </tr>
+        <tr>
+          <td>Evening</td>
+          <td>Anthropic confirms no customer data or model weights were exposed.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Analysis of the Leaked Architecture: The Heart of Claude Code</h2>
+
+    <p>
+      The leak allowed the industry to observe for the first time the real complexity of what many initially considered a simple terminal wrapper for an API. Claude Code revealed itself as a production-grade multi-agent orchestration system, designed to manage determinism and reliability in complex software engineering tasks. The codebase is organized into distinct layers that handle everything from rendering the terminal UI to coordinating multiple AI instances working in parallel.
+    </p>
+
+    <h3>System Layers and Engineering Design</h3>
+
+    <p>
+      The architecture of <a href="https://claude.com/product/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a> is divided into four critical layers identified by the engineers who audited the leaked code. First, the UI layer uses a custom rendering system based on React and Ink, which employs advanced game engine techniques such as an ASCII character pool backed by Int32Array and bit-encoded style metadata. This optimization allows for a 50x reduction in stringWidth function calls during token streaming, essential for maintaining terminal fluidity while the AI generates code in real-time.
+    </p>
+    <p>
+      Second, the command layer uses Commander.js to manage a wide range of subcommands and local tools. Third, the tools layer implements a modular plugin architecture where each capability&mdash;such as file reading, bash execution, or git integration&mdash;is isolated and protected by permissions. Finally, the orchestration and agents layer is the most sophisticated, managing task queues and sub-agent generation for parallel execution.
+    </p>
+
+    <h3>Memory Management and Agent Orchestration</h3>
+
+    <p>
+      One of the most profound findings in the internal logic is the three-layer memory system. This system uses a central file called MEMORY.md that stores short references instead of full information, forcing the agent to verify every fact against the actual codebase before acting. This design of &ldquo;systematic distrust&rdquo; is what allows <strong>Claude Code</strong> to avoid destructive hallucinations in large repositories, as the agent treats its own memory only as a hint and not as absolute truth.
+    </p>
+    <p>
+      Furthermore, the code revealed the use of internal &ldquo;swarms,&rdquo; where a coordinator agent can generate multiple worker agents with specific permissions to perform multi-activity refactorings. This orchestration approach based on Directed Acyclic Graphs (DAG) allows complex tasks to be broken down into sub-problems solved simultaneously, a technique Anthropic has perfected to overcome the context window limitations of individual models.
+    </p>
+
+    <h2>Hidden Features and the Strategic Roadmap</h2>
+
+    <p>
+      Beyond the current architecture, the leak exposed 108 modules protected by feature flags that were not active in the public version, providing an unprecedented view of Anthropic's roadmap. Among these functions are advanced automation systems and gamification elements aimed at transforming the relationship between developers and their AI tools.
+    </p>
+
+    <h3>KAIROS: The Persistent Agent</h3>
+
+    <p>
+      The functionality codenamed &ldquo;KAIROS&rdquo; is described in the code as an always-on background assistant. Unlike the current prompt-based interaction, KAIROS maintains daily logs of changes in the development environment and can perform &ldquo;dreamtasks&rdquo; during user idle periods. These memory consolidation processes allow the <strong>AI</strong> to understand a project's long-term evolution, identifying architectural inconsistencies or optimization suggestions before the developer requests them.
+    </p>
+
+    <h2>Conclusion: The Future of Agentic AI Post-Leak</h2>
+
+    <p>
+      The Claude Code leak is not simply a packaging error; it is an event that has democratized knowledge about building high-performance AI agents. Anthropic, despite its containment efforts, has lost the monopoly over the "craftsmanship" of its agentic orchestration. The availability of the source code allows competitors and startups to replicate in weeks what took Anthropic years and billions of dollars to develop.
+    </p>
+    <p>
+      However, the incident has also humanized one of the world's most valued AI companies. The discovery of code full of TODOs, hacks for circular dependencies, and Snarky virtual pets has resonated with the developer community, who now see Anthropic not as an infallible entity, but as a team of engineers dealing with technical debt and market pressure just like them.
+    </p>
+  </section>
+</article>
