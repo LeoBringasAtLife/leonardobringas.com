@@ -1,0 +1,67 @@
+:root {
+  /* --- Colors --- */
+  --bg-color: #fdfdfd;
+  --text-main: #111;
+  --text-muted: #828282;
+  --text-table: #3f3f3f;
+
+  /* --- Links --- */
+  --link-color: #4169e1;
+  --link-hover: #333333;
+  --link-nav: #666;
+
+  /* --- Borders & Backgrounds --- */
+  --border-light: #e8e8e8;
+  --border-table: #dedede;
+  --border-table-bottom: #c9c9c9;
+  --bg-table-alt: #f7f7f7;
+  --bg-table-header: #f0f0f0;
+  --bg-highlight: #f8f8f8;
+  --bg-code-inline: rgba(152, 152, 152, 0.1);
+
+  /* --- Typography --- */
+  --font-titles: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body: 'Source Serif 4', Palatino, 'Palatino Linotype', Georgia, Times, 'Times New Roman', serif;
+  --font-mono: monospace;
+
+  /* --- Font Sizes --- */
+  --fs-base: 16px;
+  --fs-content: 18px;
+  --fs-small: 14px;
+  --fs-code: 15px;
+  --fs-post-link: 24px;
+
+  /* --- Spacing --- */
+  --spacing-xl: 32px;
+  --spacing-lg: 30px;
+  --spacing-md: 20px;
+  --spacing-sm: 16px;
+  --spacing-xs: 12px;
+  --max-width-page: 800px;
+  --container-padding: 0 20px;
+
+  /* --- Radius --- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* --- Syntax Highlighting --- */
+  --hl-comment: #999988;
+  --hl-error: #a61717;
+  --hl-error-bg: #e3d2d2;
+  --hl-keyword: #000000;
+  --hl-type: #445588;
+  --hl-string: #d14;
+  --hl-regex: #009926;
+  --hl-symbol: #990073;
+  --hl-number: #009999;
+  --hl-attr: #008080;
+  --hl-builtin: #0086B3;
+  --hl-func: #990000;
+  --hl-tag: #000080;
+  --hl-diff-del: #ffdddd;
+  --hl-diff-ins: #ddffdd;
+}
