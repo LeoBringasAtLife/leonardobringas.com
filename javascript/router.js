@@ -1,5 +1,5 @@
-import { dom, state, SITE_TITLE, DEFAULT_TITLE } from './constants.js';
-import { normalizeView, renderSkeleton } from './utils.js';
+import { dom, state, SITE_TITLE, DEFAULT_TITLE, translations } from './constants.js';
+import { normalizeView, renderSkeleton, updateSEO } from './utils.js';
 
 export async function fetchArticle(slug) {
   if (dom.viewArticle) {
@@ -95,14 +95,12 @@ export async function showView(viewId, options = {}) {
     fetchArticle(options.slug);
     
     const post = state.currentPosts.find(p => p.id === options.slug);
-    if (post) {
-      document.title = `${post.titlePlain} | ${SITE_TITLE}`;
-    }
+    updateSEO(post);
   } else if (normalizedView === 'about') {
     const aboutFile = state.language === 'en' ? 'about_en' : 'about';
     fetchPage(aboutFile, dom.viewAbout);
-    document.title = `${translations[state.language].nav_about} | ${SITE_TITLE}`;
+    updateSEO();
   } else {
-    document.title = translations[state.language].brand;
+    updateSEO();
   }
 }

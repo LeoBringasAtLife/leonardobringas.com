@@ -14,6 +14,14 @@ export const dom = {
   sectionTitle: document.querySelector('.section-title'),
   btnEs: document.getElementById('btn-es'),
   btnEn: document.getElementById('btn-en'),
+  metaDescription: document.getElementById('meta-description'),
+  ogTitle: document.getElementById('og-title'),
+  ogDescription: document.getElementById('og-description'),
+  ogUrl: document.getElementById('og-url'),
+  ogImage: document.getElementById('og-image'),
+  twitterTitle: document.getElementById('twitter-title'),
+  twitterDescription: document.getElementById('twitter-description'),
+  twitterImage: document.getElementById('twitter-image'),
 };
 
 export const translations = {
