@@ -19,6 +19,7 @@ export const dom = {
   ogDescription: document.getElementById('og-description'),
   ogUrl: document.getElementById('og-url'),
   ogImage: document.getElementById('og-image'),
+  ogLocale: document.getElementById('og-locale'),
   twitterTitle: document.getElementById('twitter-title'),
   twitterDescription: document.getElementById('twitter-description'),
   twitterImage: document.getElementById('twitter-image'),

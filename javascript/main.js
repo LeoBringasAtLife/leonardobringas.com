@@ -4,7 +4,7 @@ import { showView } from './router.js';
 import { loadPosts } from './api.js';
 
 // --- i18n Logic ---
-function updateLanguageUI() {
+async function updateLanguageUI() {
   const t = translations[state.language];
   
   // Update static elements
@@ -23,7 +23,10 @@ function updateLanguageUI() {
   if (dom.btnEs) dom.btnEs.classList.toggle('active', state.language === 'es');
   if (dom.btnEn) dom.btnEn.classList.toggle('active', state.language === 'en');
   
-  // Smart content reload
+  // 1. Reload posts list first to update state.currentPosts
+  await loadPosts();
+
+  // 2. Smart content reload
   if (state.currentView === 'article' && state.currentSlug) {
     const baseId = state.currentSlug.replace('-en', '');
     const newSlug = state.language === 'en' ? `${baseId}-en` : baseId;
@@ -31,9 +34,6 @@ function updateLanguageUI() {
   } else {
     showView(state.currentView);
   }
-
-  // Reload posts list (for home view)
-  loadPosts();
 }
 
 function setLanguage(lang) {
@@ -87,11 +87,15 @@ window.addEventListener('popstate', event => {
   const hashView = parts[0];
   const slug = parts[1];
   
-  const initialView = normalizeView(hashView);
+  // Sincronizar el estado inicial con la URL
+  state.currentView = normalizeView(hashView);
+  state.currentSlug = slug;
 
-  // Set initial language UI
-  updateLanguageUI();
-
-  showView(initialView, { slug, pushHistory: false, scrollToTop: false, focusMain: false });
-  history.replaceState({ view: initialView, slug }, '', window.location.hash || window.location.pathname);
+  // updateLanguageUI ahora es async y se encarga de:
+  // 1. Cargar los posts del idioma actual
+  // 2. Ejecutar showView para la vista inicial
+  await updateLanguageUI();
+  
+  // Reemplazar el estado inicial en la historia para que coincida con lo renderizado
+  history.replaceState({ view: state.currentView, slug: state.currentSlug }, '', window.location.hash || window.location.pathname);
 })();
