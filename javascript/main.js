@@ -93,5 +93,5 @@ window.addEventListener('popstate', event => {
   updateLanguageUI();
 
   showView(initialView, { slug, pushHistory: false, scrollToTop: false, focusMain: false });
-  history.replaceState({ view: initialView, slug }, '', window.location.hash || '/');
+  history.replaceState({ view: initialView, slug }, '', window.location.hash || window.location.pathname);
 })();

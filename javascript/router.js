@@ -88,7 +88,7 @@ export async function showView(viewId, options = {}) {
   if (settings.pushHistory) {
     const hash = normalizedView === 'home' ? '' : `#${normalizedView}`;
     const url = normalizedView === 'article' && options.slug ? `${hash}/${options.slug}` : hash;
-    history.pushState({ view: normalizedView, slug: options.slug }, '', url || '/');
+    history.pushState({ view: normalizedView, slug: options.slug }, '', url || window.location.pathname);
   }
 
   if (normalizedView === 'article' && options.slug) {
