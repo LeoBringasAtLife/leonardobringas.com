@@ -1,104 +1,97 @@
-const allLinks = document.querySelectorAll('[data-view]');
-const allViews = document.querySelectorAll('.view');
-const navLinks = document.querySelectorAll('.top nav .nav-link');
-const brandLink = document.querySelector('.nav-brand');
-const mainContent = document.getElementById('main-content');
-const readingProgressBar = document.getElementById('reading-progress-bar');
+import { dom, state, translations } from './constants.js';
+import { normalizeView } from './utils.js';
+import { showView } from './router.js';
+import { loadPosts } from './api.js';
 
-const VALID_VIEWS = ['home', 'article', 'about'];
+// --- i18n Logic ---
+function updateLanguageUI() {
+  const t = translations[state.language];
+  
+  // Update static elements
+  if (dom.brandLink) dom.brandLink.textContent = t.brand;
+  
+  const navLinks = dom.navLinks();
+  if (navLinks[0]) navLinks[0].textContent = t.nav_blog;
+  if (navLinks[1]) navLinks[1].textContent = t.nav_about;
+  
+  if (dom.sectionTitle) dom.sectionTitle.textContent = t.section_posts;
+  
+  const footer = document.querySelector('footer p');
+  if (footer) footer.textContent = t.footer;
 
-function normalizeView(viewId) {
-  return VALID_VIEWS.includes(viewId) ? viewId : 'home';
+  // Update switcher active state
+  if (dom.btnEs) dom.btnEs.classList.toggle('active', state.language === 'es');
+  if (dom.btnEn) dom.btnEn.classList.toggle('active', state.language === 'en');
+  
+  // Smart content reload
+  if (state.currentView === 'article' && state.currentSlug) {
+    const baseId = state.currentSlug.replace('-en', '');
+    const newSlug = state.language === 'en' ? `${baseId}-en` : baseId;
+    showView('article', { slug: newSlug });
+  } else {
+    showView(state.currentView);
+  }
+
+  // Reload posts list (for home view)
+  loadPosts();
 }
 
-function updateReadingProgress(activeView) {
-  if (!readingProgressBar) return;
-
-  if (activeView !== 'article') {
-    readingProgressBar.style.width = '0';
-    return;
-  }
-
-  const article = document.querySelector('#view-article article');
-  if (!article) return;
-
-  const articleRect = article.getBoundingClientRect();
-  const articleTop = window.scrollY + articleRect.top;
-  const maxScrollable = Math.max(article.offsetHeight - window.innerHeight, 1);
-  const progress = Math.min(Math.max((window.scrollY - articleTop) / maxScrollable, 0), 1);
-  readingProgressBar.style.width = `${Math.round(progress * 100)}%`;
+function setLanguage(lang) {
+  if (state.language === lang) return;
+  state.language = lang;
+  localStorage.setItem('language', lang);
+  updateLanguageUI();
 }
 
-function showView(viewId, options = {}) {
-  const settings = {
-    pushHistory: true,
-    scrollToTop: true,
-    focusMain: true,
-    ...options,
-  };
-
-  const normalizedView = normalizeView(viewId);
-
-  allViews.forEach(view => view.classList.remove('active'));
-
-  const target = document.getElementById(`view-${normalizedView}`);
-  if (target) target.classList.add('active');
-
-  navLinks.forEach(link => {
-    const isActive = link.dataset.view === normalizedView;
-    link.classList.toggle('active', isActive);
-    if (isActive) {
-      link.setAttribute('aria-current', 'page');
-    } else {
-      link.removeAttribute('aria-current');
-    }
-  });
-
-  if (settings.scrollToTop) {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-  }
-
-  if (settings.focusMain && mainContent) {
-    mainContent.focus();
-  }
-
-  if (settings.pushHistory) {
-    history.pushState({ view: normalizedView }, '', `#${normalizedView}`);
-  }
-
-  updateReadingProgress(normalizedView);
-}
-
-allLinks.forEach(link => {
+// Event Listeners Globales
+dom.allLinks().forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault();
     showView(link.dataset.view);
   });
 });
 
-if (brandLink) {
-  brandLink.addEventListener('click', event => {
+if (dom.brandLink) {
+  dom.brandLink.addEventListener('click', event => {
     event.preventDefault();
     showView('home');
   });
 }
 
+if (dom.btnEs) dom.btnEs.addEventListener('click', () => setLanguage('es'));
+if (dom.btnEn) dom.btnEn.addEventListener('click', () => setLanguage('en'));
+
 window.addEventListener('scroll', () => {
-  const activeView = document.querySelector('.view.active');
-  const currentId = activeView ? activeView.id.replace('view-', '') : 'home';
-  updateReadingProgress(currentId);
+  // Acciones adicionales al hacer scroll
 }, { passive: true });
 
 window.addEventListener('popstate', event => {
-  const stateView = event.state && event.state.view ? event.state.view : window.location.hash.replace('#', '');
-  showView(stateView, { pushHistory: false, scrollToTop: false, focusMain: false });
+  const stateObj = event.state || {};
+  let view = stateObj.view;
+  let slug = stateObj.slug;
+
+  if (!view) {
+    const hash = window.location.hash.replace('#', '');
+    const parts = hash.split('/');
+    view = parts[0];
+    slug = parts[1];
+  }
+
+  showView(view, { slug, pushHistory: false, scrollToTop: false, focusMain: false });
 });
 
-(function init() {
-  const hashView = window.location.hash.replace('#', '');
+// Inicialización
+(async function init() {
+  const hash = window.location.hash.replace('#', '');
+  const parts = hash.split('/');
+  const hashView = parts[0];
+  const slug = parts[1];
+  
   const initialView = normalizeView(hashView);
 
-  showView(initialView, { pushHistory: false, scrollToTop: false, focusMain: false });
-  history.replaceState({ view: initialView }, '', `#${initialView}`);
+  // Set initial language UI
+  updateLanguageUI();
+
+  showView(initialView, { slug, pushHistory: false, scrollToTop: false, focusMain: false });
+  history.replaceState({ view: initialView, slug }, '', window.location.hash || '/');
 })();

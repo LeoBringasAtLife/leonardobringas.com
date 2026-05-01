@@ -1,0 +1,50 @@
+[
+  {
+    "id": "opencode",
+    "lang": "es",
+    "title": "¿Qué es OpenCode?",
+    "titlePlain": "OpenCode",
+    "date": "2026-04-30",
+    "dateDisplay": "Abril 30, 2026",
+    "dateArticle": "Abril 30, 2026",
+    "readTime": "6 minutos de lectura",
+    "summary": "¿Qué es OpenCode? ¿Cómo funciona? ¿Cuál es su diferencia con otros modelos de código?",
+    "file": "opencode.html"
+  },
+  {
+    "id": "opencode-en",
+    "lang": "en",
+    "title": "What is OpenCode?",
+    "titlePlain": "OpenCode",
+    "date": "2026-04-30",
+    "dateDisplay": "April 30, 2026",
+    "dateArticle": "April 30, 2026",
+    "readTime": "6 min read",
+    "summary": "What is OpenCode? How does it work? How does it differ from other code models?",
+    "file": "opencode-en.html"
+  },
+  {
+    "id": "filtrado-claude",
+    "lang": "es",
+    "title": "Se filtró el código de Claude Code",
+    "titlePlain": "Se filtró el código de Claude Code",
+    "date": "2026-03-31",
+    "dateDisplay": "Marzo 31, 2026",
+    "dateArticle": "31 de Marzo 2026",
+    "readTime": "14 minutos de lectura",
+    "summary": "Un análisis de la filtración, su arquitectura y el impacto técnico y de mercado.",
+    "file": "filtrado-claude.html"
+  },
+  {
+    "id": "filtrado-claude-en",
+    "lang": "en",
+    "title": "Claude Code's Source Code Leaked",
+    "titlePlain": "Claude Code Leaked",
+    "date": "2026-03-31",
+    "dateDisplay": "March 31, 2026",
+    "dateArticle": "March 31, 2026",
+    "readTime": "14 min read",
+    "summary": "An analysis of the leak, its architecture, and the technical and market impact.",
+    "file": "filtrado-claude-en.html"
+  }
+]
