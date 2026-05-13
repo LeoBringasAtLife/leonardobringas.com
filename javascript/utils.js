@@ -4,6 +4,11 @@ export function normalizeView(viewId) {
   return VALID_VIEWS.includes(viewId) ? viewId : 'home';
 }
 
+export function localizedArticleSlug(currentSlug, lang) {
+  const base = currentSlug.replace(/-en$/, '');
+  return lang === 'en' ? `${base}-en` : base;
+}
+
 export function renderSkeleton() {
   return `
     <article class="content">

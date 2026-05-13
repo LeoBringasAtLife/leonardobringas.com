@@ -1,5 +1,5 @@
 import { dom, state, translations } from './constants.js';
-import { normalizeView } from './utils.js';
+import { normalizeView, localizedArticleSlug } from './utils.js';
 import { showView } from './router.js';
 import { loadPosts } from './api.js';
 
@@ -28,9 +28,7 @@ async function updateLanguageUI() {
 
   // 2. Smart content reload
   if (state.currentView === 'article' && state.currentSlug) {
-    const baseId = state.currentSlug.replace('-en', '');
-    const newSlug = state.language === 'en' ? `${baseId}-en` : baseId;
-    showView('article', { slug: newSlug });
+    showView('article', { slug: localizedArticleSlug(state.currentSlug, state.language) });
   } else {
     showView(state.currentView);
   }
