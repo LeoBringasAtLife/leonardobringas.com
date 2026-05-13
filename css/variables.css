@@ -2,16 +2,16 @@
   /* --- Colors --- */
   --bg-color: #fdfdfd;
   --text-main: #111;
-  --text-muted: #828282;
+  --text-muted: #424242;
   --text-table: #3f3f3f;
 
   /* --- Links --- */
-  --link-color: #4169e1;
+  --link-color: #3052cc;
   --link-hover: #333333;
   --link-nav: #666;
 
   /* --- Borders & Backgrounds --- */
-  --border-light: #e8e8e8;
+  --border-light: #424242;
   --border-table: #dedede;
   --border-table-bottom: #c9c9c9;
   --bg-table-alt: #f7f7f7;
@@ -49,6 +49,7 @@
   --radius-full: 9999px;
 
   /* --- Syntax Highlighting --- */
+  /*
   --hl-comment: #999988;
   --hl-error: #a61717;
   --hl-error-bg: #e3d2d2;
@@ -64,4 +65,5 @@
   --hl-tag: #000080;
   --hl-diff-del: #ffdddd;
   --hl-diff-ins: #ddffdd;
+  */
 }
