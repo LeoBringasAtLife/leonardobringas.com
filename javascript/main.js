@@ -1,28 +1,24 @@
 import { dom, state } from './constants.js';
-import { normalizeView } from './utils.js';
+import { normalizeView, isAllowedArticleSlug } from './utils.js';
 import { showView } from './router.js';
 import { loadPosts } from './api.js';
 
-dom.allLinks().forEach(link => {
-  link.addEventListener('click', event => {
+dom.allLinks().forEach((link) => {
+  link.addEventListener('click', (event) => {
     event.preventDefault();
     showView(link.dataset.view);
   });
 });
 
 if (dom.brandLink) {
-  dom.brandLink.addEventListener('click', event => {
+  dom.brandLink.addEventListener('click', (event) => {
     event.preventDefault();
     showView('home');
   });
 }
 
-window.addEventListener('scroll', () => {
-  // Acciones adicionales al hacer scroll
-}, { passive: true });
-
-window.addEventListener('popstate', event => {
-  const stateObj = event.state || {};
+window.addEventListener('popstate', () => {
+  const stateObj = history.state || {};
   let view = stateObj.view;
   let slug = stateObj.slug;
 
@@ -33,20 +29,50 @@ window.addEventListener('popstate', event => {
     slug = parts[1];
   }
 
-  showView(view, { slug, pushHistory: false, scrollToTop: false, focusMain: false });
+  const navigationChanged =
+    normalizeView(view) !== state.currentView || (slug || null) !== state.currentSlug;
+
+  showView(view, {
+    slug,
+    pushHistory: false,
+    scrollToTop: navigationChanged,
+    focusMain: false,
+  });
 });
+
+function urlForView(view, slug) {
+  if (view === 'home') return window.location.pathname;
+  if (view === 'article' && slug) return `#article/${slug}`;
+  return `#${view}`;
+}
 
 (async function init() {
   const hash = window.location.hash.replace('#', '');
   const parts = hash.split('/');
   const hashView = parts[0];
-  const slug = parts[1];
+  let slug = parts[1] || null;
+  let view = normalizeView(hashView);
 
-  state.currentView = normalizeView(hashView);
-  state.currentSlug = slug;
+  try {
+    await loadPosts();
 
-  await loadPosts();
-  showView(state.currentView, { slug, pushHistory: false });
+    if (view === 'article' && !isAllowedArticleSlug(slug, state.currentPosts)) {
+      view = 'home';
+      slug = null;
+    }
 
-  history.replaceState({ view: state.currentView, slug: state.currentSlug }, '', window.location.hash || window.location.pathname);
+    showView(view, { slug, pushHistory: false });
+  } catch (error) {
+    console.error('Init error:', error);
+    if (dom.postListContainer) {
+      dom.postListContainer.innerHTML = '<p class="error">Error al iniciar el blog.</p>';
+    }
+    showView('home', { pushHistory: false });
+  }
+
+  history.replaceState(
+    { view: state.currentView, slug: state.currentSlug },
+    '',
+    urlForView(state.currentView, state.currentSlug)
+  );
 })();
