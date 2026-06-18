@@ -266,3 +266,124 @@ article tr:nth-child(even) {
   color: var(--text-main);
   border-color: var(--text-muted);
 }
+
+/* Tabbed install panel (inspired by opencode.ai, blog-themed) */
+.install-panel {
+  margin: var(--spacing-md) 0 var(--spacing-lg);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-code-block);
+}
+
+.install-panel__tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-color);
+}
+
+.install-panel__tab {
+  flex: 0 0 auto;
+  font-family: var(--font-titles);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 14px 18px;
+  margin: 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.install-panel__tab:hover {
+  color: var(--text-main);
+}
+
+.install-panel__tab.is-active {
+  color: var(--text-main);
+  border-bottom-color: var(--link-color);
+}
+
+.install-panel__tab:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: -2px;
+}
+
+.install-panel__body {
+  padding: 0;
+}
+
+.install-panel__panel {
+  display: none;
+}
+
+.install-panel__panel.is-active {
+  display: block;
+}
+
+.install-panel__command {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-md);
+}
+
+.install-panel__command pre {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-left: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow-x: auto;
+}
+
+.install-panel__command code {
+  color: var(--text-code);
+  background: transparent;
+  padding: 0;
+  font-size: var(--fs-code);
+  white-space: pre;
+  word-break: normal;
+}
+
+.install-panel__copy {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xs);
+  background: var(--bg-color);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.install-panel__copy:hover {
+  color: var(--link-color);
+  border-color: var(--link-color);
+}
+
+.install-panel__copy:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 2px;
+}
+
+.install-panel__copy.is-copied {
+  color: var(--text-main);
+  border-color: var(--text-muted);
+}

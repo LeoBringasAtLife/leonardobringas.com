@@ -6,7 +6,7 @@ import {
   escapeHTML,
   isAllowedArticleSlug,
   articleFileForPost,
-  initCopyableCodeBlocks,
+  initArticleEnhancements,
 } from './utils.js';
 
 let articleFetchController = null;
@@ -46,7 +46,7 @@ export async function fetchArticle(slug) {
         });
       }
 
-      initCopyableCodeBlocks(dom.viewArticle);
+      initArticleEnhancements(dom.viewArticle);
     }
   } catch (error) {
     if (error.name === 'AbortError') return;

@@ -124,32 +124,90 @@ export function initCopyableCodeBlocks(root) {
   root.querySelectorAll('.code-copy').forEach((block) => {
     const btn = block.querySelector('.code-copy-btn');
     const code = block.querySelector('code');
-    if (!btn || !code || btn.dataset.copyBound === '1') return;
+    if (!btn || !code) return;
+    bindCopyControl(btn, () => code.textContent?.trim() ?? '');
+  });
+}
 
-    btn.dataset.copyBound = '1';
-    const defaultLabel = btn.textContent.trim() || 'Copiar';
-    const defaultAria = btn.getAttribute('aria-label') || defaultLabel;
+function bindCopyControl(btn, getText) {
+  if (btn.dataset.copyBound === '1') return;
 
-    btn.addEventListener('click', async () => {
-      const text = code.textContent?.trim() ?? '';
-      if (!text) return;
+  btn.dataset.copyBound = '1';
+  const defaultLabel = btn.textContent.trim();
+  const hasTextLabel = defaultLabel.length > 0;
+  const defaultAria = btn.getAttribute('aria-label') || defaultLabel || 'Copiar';
 
-      try {
-        await navigator.clipboard.writeText(text);
-        btn.textContent = 'Copiado';
-        btn.classList.add('is-copied');
-        btn.setAttribute('aria-label', 'Comando copiado al portapapeles');
-        window.setTimeout(() => {
-          btn.textContent = defaultLabel;
-          btn.classList.remove('is-copied');
-          btn.setAttribute('aria-label', defaultAria);
-        }, 2000);
-      } catch {
-        btn.textContent = 'No se pudo copiar';
-        window.setTimeout(() => {
-          btn.textContent = defaultLabel;
-        }, 2000);
-      }
+  btn.addEventListener('click', async () => {
+    const text = getText();
+    if (!text) return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.classList.add('is-copied');
+      btn.setAttribute('aria-label', 'Copiado al portapapeles');
+      if (hasTextLabel) btn.textContent = 'Copiado';
+
+      window.setTimeout(() => {
+        btn.classList.remove('is-copied');
+        btn.setAttribute('aria-label', defaultAria);
+        if (hasTextLabel) btn.textContent = defaultLabel;
+      }, 2000);
+    } catch {
+      btn.setAttribute('aria-label', 'No se pudo copiar');
+      if (hasTextLabel) btn.textContent = 'Error';
+      window.setTimeout(() => {
+        btn.setAttribute('aria-label', defaultAria);
+        if (hasTextLabel) btn.textContent = defaultLabel;
+      }, 2000);
+    }
+  });
+}
+
+export function initInstallPanels(root) {
+  if (!root) return;
+
+  root.querySelectorAll('[data-install-panel]').forEach((panel) => {
+    const tabs = panel.querySelectorAll('[data-install-tab]');
+    const panels = panel.querySelectorAll('.install-panel__panel');
+
+    tabs.forEach((tab) => {
+      if (tab.dataset.tabBound === '1') return;
+      tab.dataset.tabBound = '1';
+
+      tab.addEventListener('click', () => {
+        const panelId = tab.getAttribute('aria-controls');
+        if (!panelId) return;
+
+        tabs.forEach((t) => {
+          t.classList.remove('is-active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach((p) => {
+          p.classList.remove('is-active');
+          p.hidden = true;
+        });
+
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-selected', 'true');
+
+        const target = panel.querySelector(`#${CSS.escape(panelId)}`);
+        if (target) {
+          target.classList.add('is-active');
+          target.hidden = false;
+        }
+      });
+    });
+
+    panel.querySelectorAll('.install-panel__copy').forEach((btn) => {
+      const command = btn.closest('.install-panel__command');
+      const code = command?.querySelector('code');
+      if (!code) return;
+      bindCopyControl(btn, () => code.textContent?.trim() ?? '');
     });
   });
+}
+
+export function initArticleEnhancements(root) {
+  initCopyableCodeBlocks(root);
+  initInstallPanels(root);
 }

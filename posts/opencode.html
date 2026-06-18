@@ -306,11 +306,158 @@
 
 
 
-  <div class="code-copy">
+  <p>
 
-    <button type="button" class="code-copy-btn" aria-label="Copiar comando de instalación">Copiar</button>
+    La instalación es sorprendentemente sencilla. Elegí tu método y copiá el comando en la terminal:
 
-    <pre><code>curl -fsSL https://opencode.ai/install | bash</code></pre>
+  </p>
+
+
+
+  <div class="install-panel" data-install-panel>
+
+    <div class="install-panel__tabs" role="tablist" aria-label="Métodos de instalación de OpenCode">
+
+      <button type="button" class="install-panel__tab is-active" role="tab" id="install-tab-curl"
+        aria-selected="true" aria-controls="install-panel-curl" data-install-tab>curl</button>
+
+      <button type="button" class="install-panel__tab" role="tab" id="install-tab-npm" aria-selected="false"
+        aria-controls="install-panel-npm" data-install-tab>npm</button>
+
+      <button type="button" class="install-panel__tab" role="tab" id="install-tab-bun" aria-selected="false"
+        aria-controls="install-panel-bun" data-install-tab>bun</button>
+
+      <button type="button" class="install-panel__tab" role="tab" id="install-tab-brew" aria-selected="false"
+        aria-controls="install-panel-brew" data-install-tab>brew</button>
+
+      <button type="button" class="install-panel__tab" role="tab" id="install-tab-paru" aria-selected="false"
+        aria-controls="install-panel-paru" data-install-tab>paru</button>
+
+    </div>
+
+
+
+    <div class="install-panel__body">
+
+      <div class="install-panel__panel is-active" role="tabpanel" id="install-panel-curl"
+        aria-labelledby="install-tab-curl" tabindex="0">
+
+        <div class="install-panel__command">
+
+          <pre><code>curl -fsSL https://opencode.ai/install | bash</code></pre>
+
+          <button type="button" class="install-panel__copy" aria-label="Copiar comando curl">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+              <path fill="currentColor"
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+
+            </svg>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="install-panel__panel" role="tabpanel" id="install-panel-npm" aria-labelledby="install-tab-npm"
+        hidden tabindex="0">
+
+        <div class="install-panel__command">
+
+          <pre><code>npm install -g opencode-ai</code></pre>
+
+          <button type="button" class="install-panel__copy" aria-label="Copiar comando npm">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+              <path fill="currentColor"
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+
+            </svg>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="install-panel__panel" role="tabpanel" id="install-panel-bun" aria-labelledby="install-tab-bun"
+        hidden tabindex="0">
+
+        <div class="install-panel__command">
+
+          <pre><code>bun install -g opencode-ai</code></pre>
+
+          <button type="button" class="install-panel__copy" aria-label="Copiar comando bun">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+              <path fill="currentColor"
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+
+            </svg>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="install-panel__panel" role="tabpanel" id="install-panel-brew" aria-labelledby="install-tab-brew"
+        hidden tabindex="0">
+
+        <div class="install-panel__command">
+
+          <pre><code>brew install anomalyco/tap/opencode</code></pre>
+
+          <button type="button" class="install-panel__copy" aria-label="Copiar comando brew">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+              <path fill="currentColor"
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+
+            </svg>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="install-panel__panel" role="tabpanel" id="install-panel-paru" aria-labelledby="install-tab-paru"
+        hidden tabindex="0">
+
+        <div class="install-panel__command">
+
+          <pre><code>paru -S opencode-bin</code></pre>
+
+          <button type="button" class="install-panel__copy" aria-label="Copiar comando paru">
+
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+
+              <path fill="currentColor"
+                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+
+            </svg>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 
@@ -320,11 +467,7 @@
 
     Este script detecta tu sistema operativo y arquitectura, descarga el binario correcto y lo coloca en tu PATH. También
 
-    podés instalarlo con Node.js (<code>npm install -g opencode-ai</code>), Homebrew
-
-    (<code>brew install anomalyco/tap/opencode</code>), Paru (Arch Linux), Chocolatey, Scoop o incluso Docker. La
-
-    flexibilidad es total.
+    podés usar Chocolatey, Scoop o Docker si preferís esas rutas. La flexibilidad es total.
 
   </p>
 
