@@ -21,13 +21,15 @@
   --bg-code-inline: rgba(20, 20, 19, 0.06);
   --bg-code-block: #f3f2ed;
   --text-code: #2a2a28;
+  --bg-feature-card: #f0efea;
+  --border-feature-card: rgba(20, 20, 19, 0.12);
   --skeleton-base: #eee;
   --skeleton-shine-a: #ececec;
   --skeleton-shine-b: #f5f5f5;
 
   /* --- Typography --- */
   --font-titles: 'Inter', sans-serif;
-  --font-body: 'Source Serif 4', Palatino, 'Palatino Linotype', Georgia, Times, 'Times New Roman', serif;
+  --font-body: 'Source Serif 4', serif;
   --font-mono: monospace;
 
   /* --- Font Sizes --- */
@@ -81,6 +83,8 @@
     --bg-code-inline: rgba(250, 249, 245, 0.1);
     --bg-code-block: #1e1e1c;
     --text-code: #e8e6df;
+    --bg-feature-card: #1c1c1a;
+    --border-feature-card: rgba(250, 249, 245, 0.12);
     --skeleton-base: #2a2a2a;
     --skeleton-shine-a: #2a2a2a;
     --skeleton-shine-b: #353535;
