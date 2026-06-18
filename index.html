@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' http://127.0.0.1:7529; base-uri 'self'; form-action 'none';" />
 
     <title>Blog de Leonardo Bringas</title>
 
     <meta name="description" id="meta-description" content="Blog personal de Leonardo Bringas sobre programación, IA, LLMs y reflexiones tecnológicas desde Buenos Aires." />
     <meta name="author" content="Leonardo Bringas" />
-    <link rel="canonical" href="https://leonardobringas.com/" />
+    <link rel="canonical" id="canonical-link" href="https://leonardobringas.com/" />
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" id="og-type" content="website" />
     <meta property="og:url" id="og-url" content="https://leonardobringas.com/" />
     <meta property="og:title" id="og-title" content="Blog de Leonardo Bringas" />
     <meta property="og:description" id="og-description" content="Explorando el desarrollo de software, la inteligencia artificial y el aprendizaje continuo." />
@@ -27,10 +29,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css" />
 
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="ld-json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -40,7 +42,8 @@
       "author": {
         "@type": "Person",
         "name": "Leonardo Bringas"
-      }
+      },
+      "inLanguage": "es"
     }
     </script>
 </head>
@@ -49,12 +52,12 @@
 
   <header class="top" role="banner">
     <div class="heading">
-      <a href="#" data-view="home" class="nav-brand">Blog de Leonardo Bringas</a>
+      <a href="/" data-view="home" class="nav-brand">Blog de Leonardo Bringas</a>
     </div>
     <nav aria-label="Navegación principal">
       <ul>
-        <li><a href="#" data-view="home" class="nav-link">Blog</a></li>
-        <li><a href="#" data-view="about" class="nav-link">Acerca de</a></li>
+        <li><a href="/" data-view="home" class="nav-link">Blog</a></li>
+        <li><a href="#about" data-view="about" class="nav-link">Acerca de</a></li>
       </ul>
     </nav>
   </header>
@@ -70,7 +73,7 @@
     <section id="view-about" class="view page-content" aria-labelledby="about-heading"></section>
   </main>
 
-  <footer style="text-align: center; padding: 60px 0 40px; color: var(--text-muted); font-size: var(--fs-small);">
+  <footer class="site-footer">
     <p>&copy; 2026 Leonardo Bringas. Buenos Aires, Argentina.</p>
   </footer>
 
@@ -78,5 +81,3 @@
 
 </body>
 </html>
-
-<!-- Hello World! Do you see this? It's a test. -->

@@ -1,7 +1,7 @@
 *,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font: 400 var(--fs-base)/1.6 var(--font-body);
+  font: 400 var(--fs-base)/var(--lh-body) var(--font-body);
   color: var(--text-main);
   background-color: var(--bg-color);
   -webkit-text-size-adjust: 100%;
@@ -44,4 +44,10 @@ img {
 
 #main-content:focus {
   outline: none;
+}
+
+#main-content:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
 }

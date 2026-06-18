@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
   margin: var(--spacing-xl) 0;
+  font-weight: 500;
 }
 
 .top .heading,
@@ -27,7 +28,7 @@
 .top a {
   color: var(--text-main);
   font-family: var(--font-titles);
-  font-weight: 500;
+  font-size: var(--fs-base);
 }
 
 .top a:hover,
@@ -65,4 +66,11 @@
   .top nav ul li:first-child {
     margin-left: 0;
   }
+}
+
+.site-footer {
+  text-align: center;
+  padding: 60px 0 40px;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
 }
