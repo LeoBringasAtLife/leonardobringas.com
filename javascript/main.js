@@ -1,47 +1,8 @@
-import { dom, state, translations } from './constants.js';
-import { normalizeView, localizedArticleSlug } from './utils.js';
+import { dom, state } from './constants.js';
+import { normalizeView } from './utils.js';
 import { showView } from './router.js';
 import { loadPosts } from './api.js';
 
-// --- i18n Logic ---
-async function updateLanguageUI() {
-  const t = translations[state.language];
-  
-  // Update static elements
-  if (dom.brandLink) dom.brandLink.textContent = t.brand;
-  
-  const navLinks = dom.navLinks();
-  if (navLinks[0]) navLinks[0].textContent = t.nav_blog;
-  if (navLinks[1]) navLinks[1].textContent = t.nav_about;
-  
-  if (dom.sectionTitle) dom.sectionTitle.textContent = t.section_posts;
-  
-  const footer = document.querySelector('footer p');
-  if (footer) footer.textContent = t.footer;
-
-  // Update switcher active state
-  if (dom.btnEs) dom.btnEs.classList.toggle('active', state.language === 'es');
-  if (dom.btnEn) dom.btnEn.classList.toggle('active', state.language === 'en');
-  
-  // 1. Reload posts list first to update state.currentPosts
-  await loadPosts();
-
-  // 2. Smart content reload
-  if (state.currentView === 'article' && state.currentSlug) {
-    showView('article', { slug: localizedArticleSlug(state.currentSlug, state.language) });
-  } else {
-    showView(state.currentView);
-  }
-}
-
-function setLanguage(lang) {
-  if (state.language === lang) return;
-  state.language = lang;
-  localStorage.setItem('language', lang);
-  updateLanguageUI();
-}
-
-// Event Listeners Globales
 dom.allLinks().forEach(link => {
   link.addEventListener('click', event => {
     event.preventDefault();
@@ -55,9 +16,6 @@ if (dom.brandLink) {
     showView('home');
   });
 }
-
-if (dom.btnEs) dom.btnEs.addEventListener('click', () => setLanguage('es'));
-if (dom.btnEn) dom.btnEn.addEventListener('click', () => setLanguage('en'));
 
 window.addEventListener('scroll', () => {
   // Acciones adicionales al hacer scroll
@@ -78,22 +36,17 @@ window.addEventListener('popstate', event => {
   showView(view, { slug, pushHistory: false, scrollToTop: false, focusMain: false });
 });
 
-// Inicialización
 (async function init() {
   const hash = window.location.hash.replace('#', '');
   const parts = hash.split('/');
   const hashView = parts[0];
   const slug = parts[1];
-  
-  // Sincronizar el estado inicial con la URL
+
   state.currentView = normalizeView(hashView);
   state.currentSlug = slug;
 
-  // updateLanguageUI ahora es async y se encarga de:
-  // 1. Cargar los posts del idioma actual
-  // 2. Ejecutar showView para la vista inicial
-  await updateLanguageUI();
-  
-  // Reemplazar el estado inicial en la historia para que coincida con lo renderizado
+  await loadPosts();
+  showView(state.currentView, { slug, pushHistory: false });
+
   history.replaceState({ view: state.currentView, slug: state.currentSlug }, '', window.location.hash || window.location.pathname);
 })();
