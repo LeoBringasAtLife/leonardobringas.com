@@ -1,17 +1,17 @@
 /* Code & Syntax Highlighting */
 pre,
 code {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 /* Inline code (not inside a pre block) */
-:not(pre) > code {
+:not(pre)>code {
   font-size: 0.9em;
   color: var(--text-code);
-  background-color: var(--bg-code-inline);
+  background-color: var(--bg-code-block);
   padding: 0.12em 0.35em;
   border-radius: var(--radius-xs);
-  border: none;
+  border: 1px solid var(--border-light);
   word-break: break-word;
 }
 
@@ -22,14 +22,13 @@ pre {
   color: var(--text-code);
   background-color: var(--bg-code-block);
   border: 1px solid var(--border-light);
-  border-left: 3px solid var(--link-color);
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-sm);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-pre > code {
+pre>code {
   font-size: inherit;
   color: inherit;
   background: transparent;
@@ -152,7 +151,7 @@ pre > code {
     padding: var(--spacing-xs) var(--spacing-sm);
   }
 
-  :not(pre) > code {
+  :not(pre)>code {
     font-size: 0.88em;
   }
 }

@@ -2,642 +2,284 @@
 
   <a href="/" class="back-link nav-link" data-view="home">Volver al blog</a>
 
-
-
   <h1>¿Cómo conocí OpenCode?</h1>
 
-
-
   <img src="images/posts-images/opencode-es.webp" alt="OpenCode" class="post-image" width="800" height="450"
-
     loading="lazy">
 
-
-
   <p>
-
     Hace unos meses, mientras navegaba por GitHub en busca de herramientas que pudieran facilitarme el día a día como
-
     desarrollador, me topé con un repositorio que llamó mi atención de inmediato. No solo por la cantidad de estrellas
-
-    que acumulaba —más de <strong>172.000</strong>— sino por la propuesta que hacía: un agente de codificación de IA
-
-    completamente abierto, que funcionaba desde la terminal y que prometía no atarte a ningún ecosistema en particular.
-
+    que acumulaba —más de <strong>172.000</strong>— sino por la propuesta que hacía: «un agente de codificación de IA
+    completamente abierto, que funcionaba desde la terminal y que prometía no atarte a ningún ecosistema en particular.»
     Ese repositorio era <strong>OpenCode</strong>.
-
   </p>
-
-
 
   <p>
-
     Desde entonces, no he dejado de usarlo. Y quiero contarte por qué creo que está cambiando la forma en que muchos
-
     desarrolladores abordamos nuestros proyectos.
-
   </p>
-
-
 
   <h2>¿Qué es exactamente OpenCode?</h2>
 
-
-
   <p>
-
-    OpenCode es un agente de programación impulsado por inteligencia artificial (IA) que se distribuye bajo licencia MIT.
-
+    OpenCode es un agente de programación impulsado por inteligencia artificial (IA) que se distribuye bajo licencia
+    MIT.
     Está diseñado para operar principalmente en la terminal a través de una interfaz CLI/TUI, aunque también cuenta con
-
     aplicaciones de escritorio y extensiones para los IDEs más populares.
-
   </p>
 
-
-
   <p>
-
     Pero definir OpenCode como "un asistente de programación" sería quedarse corto. No es simplemente un chatbot al que
-
     le hacés preguntas y te responde con fragmentos de código. Es un <strong>agente autónomo</strong> que entiende el
-
-    contexto de tu proyecto, analiza tu base de código y ejecuta tareas complejas por sí mismo, desde corregir bugs hasta
-
-    implementar funcionalidades enteras.
-
+    contexto de tu proyecto, analiza tu base de código y ejecuta tareas complejas por sí mismo, desde corregir bugs
+    hasta implementar funcionalidades enteras.
   </p>
-
-
 
   <p>
-
-    Lo que realmente me convenció de darle una oportunidad fue su filosofía: código abierto, <strong>local-first</strong>
-
+    Lo que realmente me convenció de darle una oportunidad fue su filosofía: código abierto,
+    <strong>local-first</strong>
     y agnóstico a los modelos. Es decir, podés usarlo con los modelos que ya conocés y pagás —como GPT-5.5, Claude 4.8
-
     Sonnet o Gemini 3.1 Pro—, o incluso ejecutarlo completamente offline con modelos locales como Ollama, LM Studio. Tus
-
     archivos nunca abandonan tu máquina, y podés seguir usando tus suscripciones existentes sin gastar un peso extra.
-
   </p>
-
-
 
   <h2>¿Cómo funciona el flujo de trabajo en OpenCode?</h2>
 
-
-
   <p>
-
     Una de las primeras cosas que noté al usar OpenCode es que no se comporta como las herramientas tradicionales. Opera
-
     mediante un <strong>bucle agéntico</strong>: una vez que le das una tarea, el agente trabaja de forma autónoma hasta
-
     completarla, sin necesidad de que estés ahí microgestionando cada paso.
-
   </p>
-
-
 
   <p>
-
-    Este flujo se organiza en dos modos principales, que podés alternar con solo presionar la tecla <strong>Tab</strong>:
-
+    Este flujo se organiza en dos modos principales, que podés alternar con solo presionar la tecla
+    <strong>Tab</strong>:
   </p>
-
-
 
   <ul>
-
     <li>
-
-      <strong>Modo Plan:</strong> es un entorno de solo lectura. Perfecto cuando estás explorando una base de código que no
-
+      <strong>Modo Plan:</strong> es un entorno de solo lectura. Perfecto cuando estás explorando una base de código que
+      no
       conocés o querés diseñar una estrategia sin riesgo de modificar nada. Le pedís a OpenCode que analice el proyecto,
-
       te explique cómo está estructurado y te proponga un plan de acción. Es como tener un arquitecto que revisa los
-
       planos antes de que empiece la construcción.
-
     </li>
 
     <li>
 
-      <strong>Modo Construir (Build):</strong> acá tiene todo el permiso de modificar tu código. Tiene permisos para editar
-
-      archivos, generar nuevo código y ejecutar comandos reales en tu sistema. Es el modo predeterminado y donde OpenCode
-
-      demuestra todo su potencial.
-
+      <strong>Modo Construir:</strong> Acá tiene todo el permiso de modificar tu código. Tiene permisos para
+      editar archivos, generar nuevo código y ejecutar comandos reales en tu sistema. Es el modo predeterminado y donde
+      OpenCode demuestra todo su potencial.
     </li>
 
   </ul>
-
-
-
   <p>
-
     Además, existe un <strong>subagente @general</strong> que podés invocar para tareas de investigación complejas o
-
     cuando necesitás ejecutar procesos de múltiples pasos. Este subagente tiene acceso a todas las herramientas
-
-    disponibles, lo que lo convierte en un aliado poderoso para resolver problemas que requieren varios pasos intermedios.
-
+    disponibles, lo que lo convierte en un aliado poderoso para resolver problemas que requieren varios pasos
+    intermedios.
   </p>
-
-
 
   <h2>¿Qué hay debajo del capó?</h2>
 
-
-
   <p>
-
     OpenCode no es solo una interfaz bonita. Su arquitectura técnica es sólida y está pensada para integrarse
-
     profundamente con tu entorno de desarrollo. Algunas de las tecnologías que integra me parecieron particularmente
-
     interesantes:
-
   </p>
 
-
-
   <ul class="feature-cards">
-
     <li class="feature-card">
-
       <p class="feature-card__kicker">LSP</p>
-
       <h3 class="feature-card__title">Language Server Protocol</h3>
-
       <p class="feature-card__text">
-
         OpenCode carga automáticamente los servidores de lenguaje de tu proyecto. Recibe diagnósticos y errores en
-
         tiempo real desde el lenguaje que usás. No adivina: entiende la sintaxis y las reglas de tu código.
-
       </p>
-
     </li>
-
     <li class="feature-card">
-
       <p class="feature-card__kicker">MCP</p>
-
       <h3 class="feature-card__title">Model Context Protocol</h3>
-
       <p class="feature-card__text">
-
         Un sistema de adaptadores que conecta la IA con herramientas externas: bases de datos, navegadores, servicios en
-
         la nube. Cada servidor MCP amplía lo que el agente puede hacer.
-
       </p>
-
     </li>
 
     <li class="feature-card">
-
       <p class="feature-card__kicker">Memoria</p>
-
       <h3 class="feature-card__title">Auto Compact</h3>
-
       <p class="feature-card__text">
-
-        Cuando la conversación se alarga y los tokens rozan el 95% del contexto, OpenCode resume la sesión para que sigas
-
+        Cuando la conversación se alarga y los tokens rozan el 95% del contexto, OpenCode resume la sesión para que
+        sigas
         trabajando sin perder el hilo. Como tomar notas y pasarte un resumen a mitad de charla.
-
       </p>
 
     </li>
-
     <li class="feature-card">
-
       <p class="feature-card__kicker">Extensión</p>
-
       <h3 class="feature-card__title">Skills y plugins</h3>
-
       <p class="feature-card__text">
-
-        Skills empaquetan conocimiento; los plugins cambian el comportamiento del agente. Podés adaptar OpenCode al flujo
-
-        de tu proyecto o de tu equipo.
-
+        Skills empaquetan conocimiento; los plugins cambian el comportamiento del agente. Podés adaptar OpenCode al
+        flujo de tu proyecto o de tu equipo.
       </p>
-
     </li>
-
   </ul>
-
-
 
   <h2>Un ecosistema sin ataduras</h2>
 
-
-
   <p>
-
-    Quizás una de las razones por las que OpenCode está ganando tanta popularidad es su enfoque agnóstico. No está atado a
-
-    un solo proveedor de modelos ni a un ecosistema cerrado.
-
+    Quizás una de las razones por las que OpenCode está ganando tanta popularidad es su enfoque agnóstico. No está atado
+    a un solo proveedor de modelos ni a un ecosistema cerrado.
   </p>
 
-
-
   <p>
-
-    Actualmente soporta más de <strong>75 proveedores de modelos</strong> diferentes a través del AI SDK y el catálogo de
-
-    Models.dev, incluyendo:
-
+    Actualmente soporta más de <strong>75 proveedores de modelos</strong> diferentes a través del AI SDK y el catálogo
+    de Models.dev, incluyendo:
   </p>
-
-
 
   <ul>
-
     <li>
-
       Modelos premium como GPT-5.5, Claude 4.8 Sonnet o Opus o Gemini 3.1 Flash/Pro, OpenRouter y más.
-
     </li>
-
     <li>
-
       Modelos locales fuera de línea mediante Ollama, LM Studio.
-
     </li>
-
   </ul>
-
-
-
   <p>
-
-    Si no querés perder tiempo eligiendo, el equipo de OpenCode ofrece <strong>OpenCode Zen</strong>, una selección curada
-
-    de modelos que han sido probados y verificados para garantizar el mejor rendimiento. También está <strong>OpenCode
-
-      Go</strong>, una suscripción mensual de bajo costo: <strong>5 dólares el primer mes, luego 10 dólares al mes</strong>.
+    Si no querés perder tiempo eligiendo, el equipo de OpenCode ofrece <strong>OpenCode Zen</strong>, una selección
+    curada de modelos que han sido probados y verificados para garantizar el mejor rendimiento. También está
+    <strong>OpenCode Go</strong>, una suscripción mensual de bajo costo: <strong>5 dólares el primer mes, luego 10
+      dólares al mes</strong>.
 
     Esta suscripción te da acceso confiable a modelos abiertos de programación populares como GLM-5.2, Kimi K2.7 Code,
-
     DeepSeek V4 Pro, Qwen3.7 Max y muchos más, con modelos alojados en Estados Unidos, Europa y Singapur para un acceso
-
     global estable.
-
   </p>
-
-
 
   <p>
-
-    Pero lo que realmente me gusta es la filosofía <strong>local-first</strong>. Tu código nunca abandona tu máquina. Podés
-
+    Pero lo que realmente me gusta es la filosofía <strong>local-first</strong>. Tu código nunca abandona tu máquina.
+    Podés
     usar tus propias claves de API de servicios que ya pagás (como Copilot o ChatGPT Plus) y OpenCode las aprovecha sin
-
     costos adicionales. Tus datos, tus modelos, tu control.
-
   </p>
-
-
 
   <h2>Instalación: en dos pasos</h2>
 
-
-
   <p>
-
     La instalación es sorprendentemente sencilla. Solo necesitás una terminal y ejecutar este comando:
-
+    <pre><code>curl -fsSL https://opencode.ai/install | bash</code></pre>
+  <p>
+    Este script detecta tu sistema operativo y arquitectura, descarga el binario correcto y lo coloca en tu PATH.
+    Si preferís otro gestor, OpenCode también está disponible vía <code>npm</code>, <code>bun</code>, Homebrew, Paru,
+    Chocolatey, Scoop o Docker. La flexibilidad es total.
   </p>
 
-
-
   <p>
-
-    La instalación es sorprendentemente sencilla. Elegí tu método y copiá el comando en la terminal:
-
-  </p>
-
-
-
-  <div class="install-panel" data-install-panel>
-
-    <div class="install-panel__tabs" role="tablist" aria-label="Métodos de instalación de OpenCode">
-
-      <button type="button" class="install-panel__tab is-active" role="tab" id="install-tab-curl"
-        aria-selected="true" aria-controls="install-panel-curl" data-install-tab>curl</button>
-
-      <button type="button" class="install-panel__tab" role="tab" id="install-tab-npm" aria-selected="false"
-        aria-controls="install-panel-npm" data-install-tab>npm</button>
-
-      <button type="button" class="install-panel__tab" role="tab" id="install-tab-bun" aria-selected="false"
-        aria-controls="install-panel-bun" data-install-tab>bun</button>
-
-      <button type="button" class="install-panel__tab" role="tab" id="install-tab-brew" aria-selected="false"
-        aria-controls="install-panel-brew" data-install-tab>brew</button>
-
-      <button type="button" class="install-panel__tab" role="tab" id="install-tab-paru" aria-selected="false"
-        aria-controls="install-panel-paru" data-install-tab>paru</button>
-
-    </div>
-
-
-
-    <div class="install-panel__body">
-
-      <div class="install-panel__panel is-active" role="tabpanel" id="install-panel-curl"
-        aria-labelledby="install-tab-curl" tabindex="0">
-
-        <div class="install-panel__command">
-
-          <pre><code>curl -fsSL https://opencode.ai/install | bash</code></pre>
-
-          <button type="button" class="install-panel__copy" aria-label="Copiar comando curl">
-
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-
-              <path fill="currentColor"
-                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
-
-            </svg>
-
-          </button>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="install-panel__panel" role="tabpanel" id="install-panel-npm" aria-labelledby="install-tab-npm"
-        hidden tabindex="0">
-
-        <div class="install-panel__command">
-
-          <pre><code>npm install -g opencode-ai</code></pre>
-
-          <button type="button" class="install-panel__copy" aria-label="Copiar comando npm">
-
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-
-              <path fill="currentColor"
-                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
-
-            </svg>
-
-          </button>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="install-panel__panel" role="tabpanel" id="install-panel-bun" aria-labelledby="install-tab-bun"
-        hidden tabindex="0">
-
-        <div class="install-panel__command">
-
-          <pre><code>bun install -g opencode-ai</code></pre>
-
-          <button type="button" class="install-panel__copy" aria-label="Copiar comando bun">
-
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-
-              <path fill="currentColor"
-                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
-
-            </svg>
-
-          </button>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="install-panel__panel" role="tabpanel" id="install-panel-brew" aria-labelledby="install-tab-brew"
-        hidden tabindex="0">
-
-        <div class="install-panel__command">
-
-          <pre><code>brew install anomalyco/tap/opencode</code></pre>
-
-          <button type="button" class="install-panel__copy" aria-label="Copiar comando brew">
-
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-
-              <path fill="currentColor"
-                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
-
-            </svg>
-
-          </button>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="install-panel__panel" role="tabpanel" id="install-panel-paru" aria-labelledby="install-tab-paru"
-        hidden tabindex="0">
-
-        <div class="install-panel__command">
-
-          <pre><code>paru -S opencode-bin</code></pre>
-
-          <button type="button" class="install-panel__copy" aria-label="Copiar comando paru">
-
-            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-
-              <path fill="currentColor"
-                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
-
-            </svg>
-
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-  <p>
-
-    Este script detecta tu sistema operativo y arquitectura, descarga el binario correcto y lo coloca en tu PATH. También
-
-    podés usar Chocolatey, Scoop o Docker si preferís esas rutas. La flexibilidad es total.
-
-  </p>
-
-
-
-  <p>
-
-    Una vez instalado, navegás hasta tu proyecto, ejecutás OpenCode y lo inicializás con el comando <code>/init</code>. El
-
+    Una vez instalado, navegás hasta tu proyecto, ejecutás OpenCode y lo inicializás con el comando <code>/init</code>.
+    El
     agente analiza tu proyecto y genera un archivo <code>AGENTS.md</code> en la raíz con la estructura y los patrones de
-
     código que usa el proyecto.
-
   </p>
-
-
 
   <p>
-
-    Después, conectás tu proveedor de modelos favorito con <code>/connect</code> y ya estás listo para empezar a trabajar.
-
+    Después, conectás tu proveedor de modelos favorito con <code>/connect</code> y ya estás listo para empezar a
+    trabajar.
   </p>
 
+  <p>
+    Este script detecta tu sistema operativo y arquitectura, descarga el binario correcto y lo coloca en tu PATH.
+    También podés usar Chocolatey, Scoop o Docker si preferís esas rutas. La flexibilidad es total.
+  </p>
 
+  <p>
+    Una vez instalado, navegás hasta tu proyecto, ejecutás OpenCode y lo inicializás con el comando <code>/init</code>.
+    El agente analiza tu proyecto y genera un archivo <code>AGENTS.md</code> en la raíz con la estructura y los patrones de código que usa el proyecto.
+  </p>
+
+  <p>
+    Después, conectás tu proveedor de modelos favorito con <code>/connect</code> y ya estás listo para empezar a
+    trabajar.
+  </p>
 
   <h2>Comandos esenciales para dominar la TUI</h2>
 
-
-
-  <p>
-
-    La interfaz TUI de OpenCode es interactiva y poderosa. Algunos comandos que uso a diario:
-
-  </p>
-
-
+  <p>La interfaz TUI de OpenCode es interactiva y poderosa. Algunos comandos que uso a diario:</p>
 
   <ul>
-
     <li><code>/undo</code> y <code>/redo</code> para deshacer y rehacer cambios</li>
-
     <li><code>/share</code> para compartir el historial de la conversación con el equipo</li>
-
     <li><code>/connect</code> para enlazar servicios o cambiar de proveedor</li>
-
     <li><code>/models</code> para cambiar el modelo sobre la marcha, sin salir de la sesión</li>
-
   </ul>
 
-
-
   <p>
-
-    Y una de las funcionalidades que más me sorprendió: la integración nativa con <strong>GitHub</strong>. Podés invocar a
-
-    OpenCode directamente desde issues o pull requests usando los comandos <code>/opencode</code> o <code>/oc</code>, y el
-
+    Y una de las funcionalidades que más me sorprendió: la integración nativa con <strong>GitHub</strong>. Podés invocar
+    a
+    OpenCode directamente desde issues o pull requests usando los comandos <code>/opencode</code> o <code>/oc</code>, y
+    el
     agente se pondrá a trabajar para resolver el problema de forma autónoma. También se integra con GitHub Actions para
-
     automatizar flujos de trabajo.
-
   </p>
-
-
 
   <h2>¿Para qué sirve en la práctica?</h2>
 
-
-
   <p>
-
     En mi experiencia, OpenCode encaja perfectamente en varios escenarios del día a día:
-
   </p>
 
-
-
   <ul>
-
-    <li><strong>Corrección de bugs:</strong> le pasás un error que encontraste y el agente lo diagnostica y soluciona.</li>
-
+    <li><strong>Corrección de bugs:</strong> le pasás un error que encontraste y el agente lo diagnostica y soluciona.
+    </li>
     <li>
 
-      <strong>Desarrollo de funcionalidades:</strong> describís lo que necesitás, OpenCode te propone un plan, lo revisás y
-
+      <strong>Desarrollo de funcionalidades:</strong> describís lo que necesitás, OpenCode te propone un plan, lo
+      revisás y
       luego lo ejecuta.
-
     </li>
 
     <li>
-
-      <strong>Refactorización:</strong> querés mejorar la estructura de tu código sin cambiar su comportamiento. OpenCode lo
-
+      <strong>Refactorización:</strong> querés mejorar la estructura de tu código sin cambiar su comportamiento.
+      OpenCode lo
       hace de forma ordenada y documentada.
-
     </li>
 
     <li>
-
-      <strong>Migraciones:</strong> cambiar de versión de una librería o incluso de framework. El agente analiza los cambios
-
+      <strong>Migraciones:</strong> cambiar de versión de una librería o incluso de framework. El agente analiza los
+      cambios
       necesarios y los aplica.
-
     </li>
 
     <li>
-
       <strong>Exploración de código base:</strong> cuando te incorporás a un proyecto nuevo, usás el Modo Plan para que
-
       OpenCode te explique cómo está organizado todo.
-
     </li>
-
   </ul>
-
-
 
   <h2>¿Vale la pena usarlo?</h2>
 
-
-
   <p>
-
-    Después de meses usándolo, mi respuesta es un rotundo sí. OpenCode no es perfecto —ninguna herramienta lo es— pero su
-
+    Después de meses usándolo, mi respuesta es un rotundo sí. OpenCode no es perfecto —ninguna herramienta lo es— pero
+    su
     combinación de apertura, flexibilidad y potencia lo convierten en una alternativa real a las soluciones propietarias
-
     que dominan el mercado.
-
   </p>
 
-
-
   <p>
-
     Con más de <strong>172.000 estrellas en
-
-      <a href="https://github.com/anomalyco/opencode" target="_blank" rel="noopener noreferrer">GitHub</a></strong>, es el
-
-    agente de codificación open source con más estrellas, por delante de Gemini CLI (105k) y openai/codex (90k). Cuenta con
-
-    una comunidad de más de <strong>900 contribuyentes</strong> y un ritmo de desarrollo impresionante. OpenCode demuestra
-
+      <a href="https://github.com/anomalyco/opencode" target="_blank" rel="noopener noreferrer">GitHub</a></strong>, es
+    el
+    agente de codificación open source con más estrellas, por delante de Gemini CLI (105k) y openai/codex (90k). Cuenta
+    con
+    una comunidad de más de <strong>900 contribuyentes</strong> y un ritmo de desarrollo impresionante. OpenCode
+    demuestra
     que el software abierto puede competir cabeza a cabeza con las grandes empresas tecnológicas.
-
   </p>
-
-
 
   <p>
-
     Si aún no lo probaste, te invito a que le des una oportunidad. Instalarlo te lleva menos de un minuto y, quién sabe,
-
     quizás encuentres en él al compañero de desarrollo que estabas buscando.
-
   </p>
-
-
 
 </article>
-
